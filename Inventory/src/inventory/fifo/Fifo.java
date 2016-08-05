@@ -88,7 +88,7 @@ public class Fifo {
     * this method is use for inventory  system,
     * sorting data by date
     */
-    public Object[][] getFifoArray2Dimension(){
+    public Object[][] sortFifoArray2Dimension(){
         Object getFifo[][] = this.data;
         
         for (int x = 0; x < this.index-1; x++) {
@@ -111,6 +111,34 @@ public class Fifo {
             }
         }
         return getFifo;
+    }
+    
+    public Object[]  getEarlyDate(){
+        Object getFifo[][] = this.data;
+        Object finalData[] = new Object[this.length];
+        
+        for (int x = 0; x < this.index-1; x++) {
+            
+            for (int i = 0; i < this.index-1; i++) {
+                Object[][] newData = new Object[this.index][this.length];
+                Date getDate1      =  (Date)getFifo[i][this.length-1];
+                Date getDate2      =  (Date)getFifo[i + 1][this.length-1];
+                
+                if (getDate1.compareTo(getDate2) > 0) {
+                    
+                    
+                    for(int j=0;j<this.length;j++)
+                        newData[i][j] = getFifo[i][j];
+                    for(int j=0;j<this.length;j++)
+                        getFifo[i][j] = getFifo[i + 1][j];
+                    for(int j=0;j<this.length;j++)
+                        getFifo[i + 1][j] = newData[i][j];        
+                }
+            }
+        }
+        for(int y=0;y<this.length;y++)
+            finalData[y] = getFifo[0][y];
+        return finalData;
     }
     
 }
