@@ -44,7 +44,7 @@ public class SortFifo {
             f.setFieldDate(ent.get(i).getBirthDate(), i);
         }
         
-        Object[][] testData = f.getFifoArray2Dimension();
+        Object[][] testData = f.sortFifoArray2Dimension();
         for(int i=0;i<f.getIndex();i++){
             for(int h=0;h<f.getLength();h++){
                 System.out.print(testData[i][h]+", ");
